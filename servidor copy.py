@@ -33,9 +33,7 @@ def get_produtos():
             "alcolico": produto[9],
             "vegetariano": produto[10],
             "vegano": produto[11],
-            "version": produto[12],
-            "detalhes": produto[13]
-
+            "version": produto[12]
         }
         formatted_produtos.append(formatted_produto)
 
@@ -43,27 +41,6 @@ def get_produtos():
 
     return formatted_produtos
 
-
-@sio.on('get_produtos')
-def send_produtos(sid):
-    # Obtém os produtos do banco de dados
-    produtos = get_produtos()
-
-    # Envie os dados dos produtos para o cliente
-    sio.emit('produtos', produtos, room=sid)
-
-def get_database_version():
-    conn = sqlite3.connect(db_file)
-    cursor = conn.cursor()
-    #cursor.execute("ALTER TABLE produtos ADD COLUMN version INTEGER DEFAULT 0")
-
-    cursor.execute("SELECT version FROM produtos")
-
-    version = cursor.fetchone()[0]
-
-    conn.close()
-
-    return version
 
 # Função para atualizar um produto no banco de dados
 def update_produto(produto):
@@ -85,6 +62,34 @@ def update_produto(produto):
     conn.commit()
     conn.close()
 
+
+# Função para excluir um produto do banco de dados
+def delete_produto(produto_id):
+    conn = sqlite3.connect(db_file)
+    cursor = conn.cursor()
+
+    # Exclui o produto do banco de dados
+    cursor.execute(
+        """
+        DELETE FROM produtos
+        WHERE id = ?
+        """,
+        (produto_id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+
+@sio.on('get_produtos')
+def send_produtos(sid):
+    # Obtém os produtos do banco de dados
+    produtos = get_produtos()
+
+    # Envie os dados dos produtos para o cliente
+    sio.emit('produtos', produtos, room=sid)
+
+
 @sio.on('update_produto')
 def handle_update_produto(sid, produto):
     # Atualiza o produto no banco de dados
@@ -96,22 +101,48 @@ def handle_update_produto(sid, produto):
     # Envie os dados atualizados dos produtos para todos os clientes conectados
     sio.emit('produtos', produtos)
 
+
+@sio.on('delete_produto')
+def handle_delete_produto(sid, produto_id):
+    # Exclui o produto do banco de dados
+    delete_produto(produto_id)
+
+    # Obtém os produtos atualizados do banco de dados
+    produtos = get_produtos()
+
+    # Envie os dados atualizados dos produtos para todos os clientes conectados
+    sio.emit('produtos', produtos)
+
+
+def get_database_version():
+    conn = sqlite3.connect(db_file)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT version FROM produtos")
+
+    version = cursor.fetchone()[0]
+
+    conn.close()
+
+    return version
+
+
 def poll_database_changes():
     last_version = None
 
     while True:
         # Verifica se houve mudanças no banco de dados
-        current_version = get_database_version()  # Implemente essa função para obter a versão atual do banco de dados
+        current_version = get_database_version()
 
+        if current_version != last_version:
+            # Houve mudanças no banco de dados, atualiza os produtos
+            produtos = get_produtos()
 
-        # Houve mudanças no banco de dados, atualiza os produtos
-        produtos = get_produtos()
+            # Envie os dados atualizados dos produtos para todos os clientes conectados
+            sio.emit('produtos', produtos)
 
-        # Envie os dados atualizados dos produtos para todos os clientes conectados
-        sio.emit('produtos', produtos)
-
-        # Atualiza a versão do banco de dados
-        last_version = current_version
+            # Atualiza a versão do banco de dados
+            last_version = current_version
 
         # Aguarde 1 segundo antes de verificar novamente
         eventlet.sleep(1)

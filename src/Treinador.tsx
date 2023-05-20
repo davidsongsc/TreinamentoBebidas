@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
-const socketIO = io('http://localhost:8000');
+const socketIO = io('http://192.168.0.50:8000');
 
 interface Produto {
   id: number;
@@ -22,15 +22,11 @@ interface UpdateProdutoProps {
   id: number;
 }
 
-const handleCommand = (command: string) => {
-  // Faça algo com o comando recebido
-  console.log('Comando recebido:', command);
-};
-
 const Treinador: React.FC<{ manopla: () => JSX.Element }> = ({ manopla }) => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [updateProdutoControl, setUpdateProdutoControl] = useState<React.ReactElement<UpdateProdutoProps> | null>(null);
+
+
 
 
   useEffect(() => {
@@ -66,7 +62,7 @@ const Treinador: React.FC<{ manopla: () => JSX.Element }> = ({ manopla }) => {
 
   return (
     <div>
-      {updateProdutoControl}
+
       <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
         <>
           <div style={{ margin: '-15px 0 0 0', position: 'fixed' }}></div>

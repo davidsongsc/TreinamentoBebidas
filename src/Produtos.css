@@ -15,8 +15,8 @@
   }
   
   .linha-produto{
-    padding: 10px 15px;
-    width: 273px;
+    padding: 2px 1px;
+    width: 235px;
     display: flex;
     justify-items: start;
     background-color: whitesmoke;
@@ -35,4 +35,21 @@
   }
   .linha-produto.hidden {
     opacity: 0;
+  }
+  button{
+    margin: 2px 2px;
+    width: 75px;
+    height: 40px;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }

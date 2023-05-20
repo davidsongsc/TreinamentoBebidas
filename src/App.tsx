@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 //import Header from './Header';
 import ListaProdutos from './ListaProdutos';
-import Treinador from './Treinador';
 import './Produtos.css'
 import UpdateProduto from './UpdateProduto';
 
@@ -14,7 +13,7 @@ function App() {
       {/*/<Header />*/}
       <Routes>
         <Route path="/" element={<ListaProdutos />} />
-        <Route path="/update" element={<UpdateProduto id={1}/>} />
+        <Route path="/manual" element={<UpdateProduto id={1}/>} />
 
         {/* Adicione mais rotas para outras páginas */}
         {/* Adicione mais rotas para outras páginas */}

@@ -39,20 +39,23 @@ const ListaProdutos: React.FC = () => {
     <div className="lista-produtos-container" >
       <ul className="lista-produtos">
         {produtos.map((product) => (
-          <li key={product.id} className={`linha-produto ${product.version === 1 ? '': 'hidden'}`} style={{
-            display: `${product.version === 0 ? "none" : 'flex'}`
+          <li key={product.id} className={`linha-produto ${product.version === 1 ? '' : 'hidden'}`} style={{
+            display: `${product.version === 0 ? "none" : 'flex'}`,
+            justifyContent: 'center',
           }}>
             <span><img src={product.imagem} alt="" style={{
               display: `${product.detalhes === 1 ? "none" : 'flex'}`,
-              width: '250px',
-              height: '250px',
+              width: '200px',
+              height: '200px',
+              position: 'relative',
+              top: '12px',
               borderRadius: '15px',
               boxShadow: '1px 1px 7px black'
             }} /></span>
             <span><h1 style={{
               color: 'black',
               textShadow: '1px 1px 4px black',
-              textAlign:'center',
+              textAlign: 'center',
               display: `${product.detalhes === 1 ? "none" : 'flex'}`
             }}>{product.nome}&reg;</h1></span>
             <div style={{
@@ -70,9 +73,21 @@ const ListaProdutos: React.FC = () => {
                   </h2></span>
                 <span style={{ fontSize: '16px' }}>{/* Utilize map para exibir a lista de componentes */}
                   {product.composicao.length > 0 ? (<h3>Composição</h3>) : null}
+
                   {product.composicao.map((componente, index) => (
-                    <p key={index}>{index + 1}º {componente}</p>
+                    <div key={index} style={{
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}>
+                      <div>
+                        -
+                      </div>
+                      <div>
+                        {componente}
+                      </div>
+                    </div>
                   ))}
+
                 </span>
                 <span>
                   {product.sabores.length > 0 ? (
@@ -84,15 +99,33 @@ const ListaProdutos: React.FC = () => {
                 </span>
               </div>
 
-              <div>
-                <span style={{ fontSize: '11px' }}>{product.obs}</span>
-                <span style={{ fontSize: '11px' }}>{product.alerta}</span>
+              <div style={{
+                display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+                justifyContent: 'center'
+              }}>
+                <span style={{ fontSize: '16px', padding: '15px 15px', background: 'white', letterSpacing: '1.5px' }}>{product.obs}</span>
+
+              </div>
+              <div style={{
+                display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+                justifyContent: 'center'
+              }}>
+
+
                 <span style={{ fontSize: '11px' }}>{product.grupo}</span>
               </div>
+              <div style={{
+                display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+                justifyContent: 'center'
+              }}>
+
+                <span style={{ fontSize: '11px', padding: '15px 15px', background: 'white', color:'black' }}>{product.alerta}</span>
+
+              </div>
             </div>
-          </li>
+          </li >
         ))}
-      </ul>
+      </ul >
     </div >
   );
 };
