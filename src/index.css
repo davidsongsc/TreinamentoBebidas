@@ -5,9 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(to right, black, white);
-  background-size: 200% 100%;
-  animation: gradientAnimation 20s ease infinite;
+  background-size: 150%;
+  animation: gradientAnimation 180s ease infinite;
+  background-image: url('http://192.168.43.1:5000/images/outback');
+  background-repeat: no-repeat;
 
 }
 
@@ -31,12 +32,21 @@ code {
 
 @keyframes gradientAnimation {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 10%;
   }
-  50% {
-    background-position: 100% 0%;
+  20% {
+    background-position: 50% 10%;
+  }
+  40% {
+    background-position: 0% 10%;
+  }
+  60% {
+    background-position: 10% 10%;
+  }
+  80% {
+    background-position: 60% 10%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0% 10%;
   }
 }

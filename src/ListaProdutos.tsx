@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:8000');
+const socket = io('http://192.168.43.1:8000');
 
 interface Produto {
   id: number;
@@ -18,6 +18,10 @@ interface Produto {
   vegano: string;
   version: number;
   detalhes: number;
+  tipo: number;
+  descricao: string;
+  sys: string;
+  imglist: string[];
 }
 
 const ListaProdutos: React.FC = () => {
@@ -41,85 +45,131 @@ const ListaProdutos: React.FC = () => {
         {produtos.map((product) => (
           <li key={product.id} className={`linha-produto ${product.version === 1 ? '' : 'hidden'}`} style={{
             display: `${product.version === 0 ? "none" : 'flex'}`,
-            justifyContent: 'center',
+            minWidth: `${product.detalhes === 4 || product.detalhes === 5 ? '200px' : '400px'}`,
+            background: `${product.detalhes === 5 || product.detalhes === 6 ? '#ffe140' : '#ff7f50'}`,
+
+            justifyContent: 'flex-start'
           }}>
-            <span><img src={product.imagem} alt="" style={{
-              display: `${product.detalhes === 1 ? "none" : 'flex'}`,
-              width: '200px',
-              height: '200px',
-              position: 'relative',
-              top: '12px',
-              borderRadius: '15px',
-              boxShadow: '1px 1px 7px black'
-            }} /></span>
-            <span><h1 style={{
-              color: 'black',
-              textShadow: '1px 1px 4px black',
-              textAlign: 'center',
-              display: `${product.detalhes === 1 ? "none" : 'flex'}`
-            }}>{product.nome}&reg;</h1></span>
+
+            <div style={{
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'space-around',
+              alignItems: 'center'
+            }}>
+              <span>
+                <img src={product.imagem} alt="" style={{
+                  display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+                  width: `${product.detalhes === 3 ? '500px' : '200px'}`,
+                  height: `${product.detalhes === 3 ? '500px' : '200px'}`,
+                  position: 'relative',
+                  top: '0px',
+                  borderRadius: '15px',
+                  boxShadow: '1px 1px 7px black'
+                }} /></span>
+              <span style={{ display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'block'}` }}>
+                <h1 style={{
+                  color: 'black',
+                  textShadow: '1px 1px 4px black',
+                  textAlign: 'center',
+                  fontSize: `${product.detalhes === 3 ? '80px' : '40px'}`,
+                  position: 'relative',
+                  left: '4px',
+                  width: `${product.detalhes === 3 || product.detalhes === 5 ? '500px' : '330px'}`,
+                  display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+                  background: 'white',
+                  padding: '80px 0',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '5px',
+                  boxShadow: '1px 1px'
+                }}>{product.nome}&reg;</h1></span>
+            </div>
             <div style={{
               display: `${product.detalhes === 0 ? "none" : 'flex'}`,
-              flexDirection: 'column'
+              alignItems: 'center',
+              flexDirection: 'column',
+              width: '100%'
             }}>
               <div style={{
-                display: 'flex', width: '90%',
-                justifyContent: 'space-around',
-                flexDirection: 'column',
-                alignItems: 'center'
-              }}>
-                <span>
-                  <h2 style={{ textShadow: '1px 1px 2px white' }}>{product.liquido}
-                  </h2></span>
-                <span style={{ fontSize: '16px' }}>{/* Utilize map para exibir a lista de componentes */}
-                  {product.composicao.length > 0 ? (<h3>Composição</h3>) : null}
+                display: 'flex',
 
+                flexDirection: 'column',
+                alignItems: 'center',
+
+              }}>
+                <span style={{ display: `${product.detalhes === 4 ? 'none' : 'block'}` }}>
+                  <h2 style={{ textShadow: '1px 1px 2px white' }}>{product.liquido}
+                  </h2>
+                </span>
+                <span style={{ fontSize: '26px', display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'block'}` }}>{/* Utilize map para exibir a lista de componentes */}
                   {product.composicao.map((componente, index) => (
                     <div key={index} style={{
                       display: 'flex',
-                      justifyContent: 'space-between'
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      backgroundColor: 'white',
+                      padding: '5px 10px',
+                      boxShadow: '1px 1px 4px black',
+                      fontSize: `${product.detalhes === 3 ? '50px' : '30px'}`,
                     }}>
-                      <div>
-                        -
-                      </div>
-                      <div>
-                        {componente}
+                      <div style={{ textTransform: 'uppercase' }}>
+                        {index + 1}º {componente}
                       </div>
                     </div>
                   ))}
 
                 </span>
-                <span>
-                  {product.sabores.length > 0 ? (
-                    <h3>Opções</h3>
-                  ) : null}
-                  {product.sabores.map((sabor, index) => (
-                    <p key={index}> {sabor}</p>
-                  ))}
-                </span>
+
+
+                <span style={{
+                  fontSize: '30px',
+                  padding: '15px 15px',
+                  background: 'white',
+                  borderRadius: '8px',
+                  boxShadow: '1px 1px',
+                  letterSpacing: '1.5px',
+                  display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'flex'}`
+                }}>{product.descricao}</span>
+
+              </div>
+              <div style={{
+                display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+                justifyContent: 'center',
+                width: '50%'
+              }}>
+
+                <div style={{
+                  display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+                  justifyContent: 'center'
+                }}>
+                  <span style={{ display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'flex'}` }}>
+                    {product.sabores.length > 0 ? (
+                      <h3 style={{ fontSize: '35px' }}>Opções</h3>
+                    ) : null}
+                    {product.sabores.map((sabor, index) => (
+                      <>
+
+                        <p key={index} style={{ fontSize: '35px', width: '150px', padding: '0 40px', textTransform: 'capitalize', letterSpacing: '3px', textDecoration: 'overline orange 15px' }}> {sabor}
+                          <img src={`http://192.168.43.1:5000/images/${sabor}`} alt="" style={{ height: '120px' }} />
+                        </p>
+
+                      </>
+                    ))}
+                  </span>
+
+
+                </div>
+
+
               </div>
 
               <div style={{
                 display: `${product.detalhes === 1 ? "none" : 'flex'}`,
                 justifyContent: 'center'
               }}>
-                <span style={{ fontSize: '16px', padding: '15px 15px', background: 'white', letterSpacing: '1.5px' }}>{product.obs}</span>
 
-              </div>
-              <div style={{
-                display: `${product.detalhes === 1 ? "none" : 'flex'}`,
-                justifyContent: 'center'
-              }}>
-
-
-                <span style={{ fontSize: '11px' }}>{product.grupo}</span>
-              </div>
-              <div style={{
-                display: `${product.detalhes === 1 ? "none" : 'flex'}`,
-                justifyContent: 'center'
-              }}>
-
-                <span style={{ fontSize: '11px', padding: '15px 15px', background: 'white', color:'black' }}>{product.alerta}</span>
+                <span style={{ fontSize: '30px', padding: '15px 15px', background: 'white', color: 'black', borderRadius: '5px', boxShadow: '1px 1px', display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'block'}` }}>{product.obs}</span>
 
               </div>
             </div>

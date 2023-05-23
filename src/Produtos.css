@@ -1,55 +1,63 @@
 /* ListaProdutos.css */
+.controlador p {
+  background-color: white;
+  text-align: center;
+  text-transform: uppercase;
+}
 
 .lista-produtos-container {
-    margin-top: 0px;
-  }
-  
-  .lista-produtos {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: red white;
-  }
-  
-  .linha-produto{
-    padding: 2px 1px;
-    width: 235px;
-    display: flex;
-    justify-items: start;
-    background-color: whitesmoke;
-    border-radius: 5px;
-    box-shadow: black 1px 1px 4px;
-    margin: 3px 2px 0 -7px;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: flex-start;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-    transition-delay: 1.5s;
-    border-width: 4px;
-    border-style: double;
-  }
-  .linha-produto.hidden {
-    opacity: 0;
-  }
-  button{
-    margin: 2px 2px;
-    width: 75px;
-    height: 40px;
-  }
+  margin-top: 0px;
+}
 
-  @keyframes gradientAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
+.lista-produtos {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: red white;
+}
+
+.linha-produto {
+  padding: 20px 10px;
+  display: flex;
+  justify-items: start;
+  background-color: orangered;
+  border-radius: 5px;
+  box-shadow: black 1px 1px 4px;
+  margin: 1px 2px 0 -7px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: flex-start;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  transition-delay: 1.5s;
+  border-width: 4px;
+  border-style: double;
+}
+
+.linha-produto.hidden {
+  opacity: 0;
+}
+
+button {
+  margin: 2px 2px;
+  width: 95px;
+  height: 30px;
+}
+
+.titutlo-produto {
+  border-radius: 5px;
+  margin: 3px;
+  background-color: orangered;
+}
+.titutlo-produto p {
+  margin: 8px auto;
+  font-size: 25px;
+  width: 180px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px black;
+}
+
