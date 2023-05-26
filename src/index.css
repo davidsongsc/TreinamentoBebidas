@@ -5,8 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-size: 150%;
-  animation: gradientAnimation 180s ease infinite;
+  background-size: 100%;
   background-image: url('http://192.168.43.1:5000/images/outback');
   background-repeat: no-repeat;
 
@@ -28,25 +27,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 10%;
-  }
-  20% {
-    background-position: 50% 10%;
-  }
-  40% {
-    background-position: 0% 10%;
-  }
-  60% {
-    background-position: 10% 10%;
-  }
-  80% {
-    background-position: 60% 10%;
-  }
-  100% {
-    background-position: 0% 10%;
-  }
 }

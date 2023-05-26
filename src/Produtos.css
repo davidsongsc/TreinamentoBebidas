@@ -17,10 +17,11 @@
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: red white;
+  align-items: flex-start;
 }
 
 .linha-produto {
-  padding: 20px 10px;
+  padding: 5px 10px;
   display: flex;
   justify-items: start;
   background-color: orangered;
@@ -34,8 +35,8 @@
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
   transition-delay: 1.5s;
-  border-width: 4px;
-  border-style: double;
+  border-width: 6px;
+  /*border-style: double;*/
 }
 
 .linha-produto.hidden {
@@ -43,8 +44,9 @@
 }
 
 button {
-  margin: 2px 2px;
-  width: 95px;
+  margin: 2px 1px;
+  width: 78px;
+  text-align: left;
   height: 30px;
 }
 
@@ -52,12 +54,28 @@ button {
   border-radius: 5px;
   margin: 3px;
   background-color: orangered;
+  
 }
 .titutlo-produto p {
   margin: 8px auto;
-  font-size: 25px;
+  font-size: 26px;
+  font-weight: 900;
   width: 180px;
+  height: 90px;
   border-radius: 5px;
   box-shadow: 1px 1px 3px black;
 }
+.titutlo-produto button {
+  height: 60px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color:whitesmoke;
+  background-color: black;
+}
 
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

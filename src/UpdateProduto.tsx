@@ -86,7 +86,7 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
 
   return (
     <div>
-      
+
       <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
         {produtos.map((product) => (
           <li
@@ -95,296 +95,317 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
             style={{
               display: `${product.version === 1 ? 'block' : 'none'}`,
               backgroundColor: colors[product.detalhes % colors.length],
-        color: `${product.version === 0 ? 'black' : 'red'}`,
-        borderWidth: '4px',
-        margin: '5px',
-        width: '200px'
+              color: `${product.version === 0 ? 'black' : 'red'}`,
+              borderWidth: '4px',
+              margin: '5px 2px',
+              width: '160px'
             }}
           >
-        <div>
-          <span>
-            <h1
-              style={{
-                color: 'black',
-                textShadow: '1px 1px 6px black',
-                textAlign: 'center',
-                fontSize: '25px',
-                textTransform: 'capitalize',
-                display: `${product.detalhes === 1 ? 'flex' : 'flex'}`,
-              }}
-            >
-              {product.nome}&reg;
-            </h1>
-          </span>
-          <div>
+            <div>
+              <span>
+                <h1
+                  style={{
+                    color: 'black',
+                    textShadow: '1px 1px 6px black',
+                    textAlign: 'center',
+                    fontSize: '25px',
+                    textTransform: 'capitalize',
+                    display: `${product.detalhes === 1 ? 'flex' : 'flex'}`,
+                  }}
+                >
+                  {product.nome}&reg;
+                </h1>
+              </span>
+              <div>
 
-            <button
-              style={{
-                backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'brown'}`,
-                color: `${product.version === 0 ? 'black' : 'white'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 1,
-                    detalhes: 4,
-                  };
+                <button
+                  style={{
+                    backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'brown'}`,
+                    color: `${product.version === 0 ? 'black' : 'white'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 1,
+                        detalhes: 4,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                }
-              }}
-            >
-              mostrar
-            </button>
-            <button
+                      socket.emit('update_produto', updatedProduto);
+                    }
+                  }}
+                >
+                  mostrar
+                </button>
+                <button
 
-              style={{
-                backgroundColor: `${product.detalhes === 0 ? 'whitesmoke' : 'red'}`,
-                color: `${product.version === 0 ? 'black' : 'black'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 2,
-                    detalhes: 0,
-                  };
+                  style={{
+                    backgroundColor: `${product.detalhes === 0 ? 'whitesmoke' : 'red'}`,
+                    color: `${product.version === 0 ? 'black' : 'black'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 2,
+                        detalhes: 0,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                  setTimeout(() => {
-                    const updatedProduto: Produto = {
-                      ...product,
-                      version: 1,
-                      detalhes: 0,
-                    };
+                      socket.emit('update_produto', updatedProduto);
+                      setTimeout(() => {
+                        const updatedProduto: Produto = {
+                          ...product,
+                          version: 1,
+                          detalhes: 0,
+                        };
 
-                    socket.emit('update_produto', updatedProduto);
-                  }, 1500); // 1500 milissegundos = 1.5 segundos
-                }
-              }}
-            >
-              exibir
-            </button>
-          </div>
+                        socket.emit('update_produto', updatedProduto);
+                      }, 1500); // 1500 milissegundos = 1.5 segundos
+                    }
+                  }}
+                >
+                  exibir
+                </button>
+              </div>
 
-          <div style={{
-            display: `${product.version === 0 ? 'none' : 'block'}`
-          }}>
-<button
-              style={{
-                backgroundColor: `${product.detalhes === 5 ? 'red' : 'whitesmoke'}`,
-                color: `${product.version === 0 ? 'white' : 'black'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 1,
-                    detalhes: 5,
-                  };
+              <div style={{
+                display: `${product.version === 0 ? 'none' : 'block'}`
+              }}>
+                <button
+                  style={{
+                    backgroundColor: `${product.detalhes === 5 ? 'red' : 'whitesmoke'}`,
+                    color: `${product.version === 0 ? 'white' : 'black'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 1,
+                        detalhes: 5,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                }
-              }}
-            >
-              MARCAR
-            </button>
-            <button
+                      socket.emit('update_produto', updatedProduto);
+                    }
+                  }}
+                >
+                  select
+                </button>
+                <button
 
-              style={{
-                backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'violet'}`,
-                color: `${product.version === 0 ? 'black' : 'white'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 1,
-                    detalhes: 4,
-                  };
+                  style={{
+                    backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'violet'}`,
+                    color: `${product.version === 0 ? 'black' : 'white'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 1,
+                        detalhes: 4,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                  setTimeout(() => {
-                    const updatedProduto: Produto = {
-                      ...product,
-                      version: 1,
-                      detalhes: 0,
-                    };
+                      socket.emit('update_produto', updatedProduto);
+                      setTimeout(() => {
+                        const updatedProduto: Produto = {
+                          ...product,
+                          version: 1,
+                          detalhes: 0,
+                        };
 
-                    socket.emit('update_produto', updatedProduto);
-                  }, 3500); // 1500 milissegundos = 1.5 segundos
-                  setTimeout(() => {
-                    const updatedProduto: Produto = {
-                      ...product,
-                      version: 1,
-                      detalhes: 1,
-                    };
+                        socket.emit('update_produto', updatedProduto);
+                      }, 3500); // 1500 milissegundos = 1.5 segundos
+                      setTimeout(() => {
+                        const updatedProduto: Produto = {
+                          ...product,
+                          version: 1,
+                          detalhes: 1,
+                        };
 
-                    socket.emit('update_produto', updatedProduto);
-                  }, 8000);
-                  setTimeout(() => {
-                    const updatedProduto: Produto = {
-                      ...product,
-                      version: 1,
-                      detalhes: 2,
-                    };
+                        socket.emit('update_produto', updatedProduto);
+                      }, 8000);
+                      setTimeout(() => {
+                        const updatedProduto: Produto = {
+                          ...product,
+                          version: 1,
+                          detalhes: 3,
+                        };
 
-                    socket.emit('update_produto', updatedProduto);
-                  }, 16000);
-                }
-              }}
-            >
-              ilustrar
-            </button>
-            <button
-              style={{
-                backgroundColor: `${product.detalhes === 2 ? 'red' : 'whitesmoke'}`,
-                color: `${product.version === 0 ? 'white' : 'black'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 1,
-                    detalhes: 2,
-                  };
+                        socket.emit('update_produto', updatedProduto);
+                      }, 16000);
+                    }
+                  }}
+                >
+                  animar
+                </button>
+                <button
+                  style={{
+                    backgroundColor: `${product.detalhes === 2 ? 'red' : 'whitesmoke'}`,
+                    color: `${product.version === 0 ? 'white' : 'black'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 1,
+                        detalhes: 2,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                }
-              }}
-            >
-              CONTEUDO
-            </button>
-            <button
-              style={{
-                backgroundColor: `${product.detalhes === 3 ? 'red' : 'whitesmoke'}`,
-                color: `${product.version === 0 ? 'white' : 'black'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 1,
-                    detalhes: 3,
-                  };
+                      socket.emit('update_produto', updatedProduto);
+                    }
+                  }}
+                >
+                  info
+                </button>
+                <button
+                  style={{
+                    backgroundColor: `${product.detalhes === 3 ? 'red' : 'whitesmoke'}`,
+                    color: `${product.version === 0 ? 'white' : 'black'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 1,
+                        detalhes: 3,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                }
-              }}
-            >
-              TELA++
-            </button>
-            <button
-              style={{
-                backgroundColor: `${product.detalhes === 1 ? 'red' : 'whitesmoke'}`,
-                color: `${product.version === 0 ? 'white' : 'black'}`,
+                      socket.emit('update_produto', updatedProduto);
+                    }
+                  }}
+                >
+                  TELA++
+                </button>
+                <button
+                  style={{
+                    backgroundColor: `${product.detalhes === 1 ? 'red' : 'whitesmoke'}`,
+                    color: `${product.version === 0 ? 'white' : 'black'}`,
 
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 1,
-                    detalhes: 1,
-                  };
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 1,
+                        detalhes: 1,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                }
-              }}
-            >
-              Itens
-            </button>
+                      socket.emit('update_produto', updatedProduto);
+                    }
+                  }}
+                >
+                  Itens
+                </button>
 
-            <button
-              style={{
-                backgroundColor: `${product.detalhes === 4 ? 'red' : 'whitesmoke'}`,
-                color: `${product.version === 0 ? 'white' : 'black'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 1,
-                    detalhes: 4,
-                  };
+                <button
+                  style={{
+                    backgroundColor: `${product.detalhes === 4 ? 'red' : 'whitesmoke'}`,
+                    color: `${product.version === 0 ? 'white' : 'black'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 1,
+                        detalhes: 4,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                }
-              }}
-            >
-              imagem
-            </button>
-            
-          </div>
-          <div style={{
-            display: `${product.version === 0 ? 'none' : 'block'}`
-          }}>
-            <button
-              style={{
-                backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'black'}`,
-                color: `${product.version === 0 ? 'white' : 'white'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 0,
-                    detalhes: 0,
-                  };
+                      socket.emit('update_produto', updatedProduto);
+                    }
+                  }}
+                >
+                  imagem
+                </button>
 
-                  socket.emit('update_produto', updatedProduto);
-                }
-              }}
-            >
-              REMOVE
-            </button>
-            <button 
-              style={{
-                backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'black'}`,
-                color: `${product.version === 0 ? 'white' : 'white'}`,
-                textTransform: 'uppercase',
-              }}
-              onClick={() => {
-                if (socket) {
-                  const updatedProduto: Produto = {
-                    ...product,
-                    version: 2,
-                    detalhes: 4,
-                  };
+              </div>
+              <div style={{
+                display: `${product.version === 0 ? 'none' : 'block'}`
+              }}>
+                <button
+                  style={{
+                    backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'black'}`,
+                    color: `${product.version === 0 ? 'white' : 'white'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 0,
+                        detalhes: 0,
+                      };
 
-                  socket.emit('update_produto', updatedProduto);
-                  setTimeout(() => {
-                    const updatedProduto: Produto = {
-                      ...product,
-                      version: 0,
-                      detalhes: 0,
-                    };
+                      socket.emit('update_produto', updatedProduto);
+                    }
+                  }}
+                >
+                  REMOVE
+                </button>
+                <button
+                  style={{
+                    backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'black'}`,
+                    color: `${product.version === 0 ? 'white' : 'white'}`,
+                    textTransform: 'uppercase',
+                  }}
+                  onClick={() => {
+                    if (socket) {
+                      const updatedProduto: Produto = {
+                        ...product,
+                        version: 2,
+                        detalhes: 4,
+                      };
 
-                    socket.emit('update_produto', updatedProduto);
-                  }, 2500); // 2500 milissegundos = 2.5 segundos
-                }
-              }}
-            >
-              OCULTAR
-            </button>
-          </div>
-        </div>
+                      socket.emit('update_produto', updatedProduto);
+                      setTimeout(() => {
+                        const updatedProduto: Produto = {
+                          ...product,
+                          version: 0,
+                          detalhes: 0,
+                        };
 
-      </li>
+                        socket.emit('update_produto', updatedProduto);
+                      }, 2500); // 2500 milissegundos = 2.5 segundos
+                    }
+                  }}
+                >
+                  OCULTAR
+                </button>
+              </div>
+            </div>
+
+          </li>
         ))}
-    </ul>
+      </ul>
       <div style={{ display: 'flex', flexWrap: 'wrap' }} className='controlador'>
         {manopla()}
+        <div className='titutlo-produto'>
+          <p>frutas</p>
+          <button
+            onClick={() => {
+              if (socket) {
+                socket.emit('mostrar', 'frutas');
+              }
+            }}
+          >
+            exibir
+          </button>
+          <button
+            onClick={() => {
+              if (socket) {
+                socket.emit('ocultar', 'frutas');
+              }
+            }}
+          >
+            ocultar
+          </button>
+        </div>
         <div className='titutlo-produto'>
           <p>Destilados Caipirinhas</p>
           <button
@@ -400,6 +421,48 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
             onClick={() => {
               if (socket) {
                 socket.emit('ocultar', 'destilado');
+              }
+            }}
+          >
+            ocultar
+          </button>
+        </div>
+        <div className='titutlo-produto'>
+          <p>caipirinhas Açucar</p>
+          <button
+            onClick={() => {
+              if (socket) {
+                socket.emit('mostrar', 'caipirinhas');
+              }
+            }}
+          >
+            exibir
+          </button>
+          <button
+            onClick={() => {
+              if (socket) {
+                socket.emit('ocultar', 'caipirinhas');
+              }
+            }}
+          >
+            ocultar
+          </button>
+        </div>
+        <div className='titutlo-produto'>
+          <p>caipirinhas Xarope</p>
+          <button
+            onClick={() => {
+              if (socket) {
+                socket.emit('mostrar', 'caipirinhas2');
+              }
+            }}
+          >
+            exibir
+          </button>
+          <button
+            onClick={() => {
+              if (socket) {
+                socket.emit('ocultar', 'caipirinhas2');
               }
             }}
           >
@@ -469,69 +532,8 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
             ocultar
           </button>
         </div>
-        <div className='titutlo-produto'>
-          <p>frutas</p>
-          <button
-            onClick={() => {
-              if (socket) {
-                socket.emit('mostrar', 'frutas');
-              }
-            }}
-          >
-            exibir
-          </button>
-          <button
-            onClick={() => {
-              if (socket) {
-                socket.emit('ocultar', 'frutas');
-              }
-            }}
-          >
-            ocultar
-          </button>
-        </div>
-        <div className='titutlo-produto'>
-          <p>caipirinhas Açucar</p>
-          <button
-            onClick={() => {
-              if (socket) {
-                socket.emit('mostrar', 'caipirinhas');
-              }
-            }}
-          >
-            exibir
-          </button>
-          <button
-            onClick={() => {
-              if (socket) {
-                socket.emit('ocultar', 'caipirinhas');
-              }
-            }}
-          >
-            ocultar
-          </button>
-        </div>
-        <div className='titutlo-produto'>
-          <p>caipirinhas Xarope</p>
-          <button
-            onClick={() => {
-              if (socket) {
-                socket.emit('mostrar', 'caipirinhas2');
-              }
-            }}
-          >
-            exibir
-          </button>
-          <button
-            onClick={() => {
-              if (socket) {
-                socket.emit('ocultar', 'caipirinhas2');
-              }
-            }}
-          >
-            ocultar
-          </button>
-        </div>
+
+
         <div className='titutlo-produto'>
           <p>drinks</p>
           <button

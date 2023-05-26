@@ -45,10 +45,15 @@ const ListaProdutos: React.FC = () => {
         {produtos.map((product) => (
           <li key={product.id} className={`linha-produto ${product.version === 1 ? '' : 'hidden'}`} style={{
             display: `${product.version === 0 ? "none" : 'flex'}`,
+            borderStyle: `${product.detalhes === 5 || product.detalhes === 6 ? 'ridge' : 'solid'}`,
             minWidth: `${product.detalhes === 4 || product.detalhes === 5 ? '200px' : '400px'}`,
-            background: `${product.detalhes === 5 || product.detalhes === 6 ? '#ffe140' : '#ff7f50'}`,
+            background: `${product.detalhes === 5 || product.detalhes === 6 ? '#d3d600' : '#cd5c5c'}`,
+            justifyContent: 'flex-start',
+            animation: 'gradientAnimation 15s ease infinite',
+            backgroundImage: 'linear-gradient(45deg, white, orange, gold)',
+            backgroundSize: "150% 150%"
+           
 
-            justifyContent: 'flex-start'
           }}>
 
             <div style={{
@@ -75,15 +80,55 @@ const ListaProdutos: React.FC = () => {
                   fontSize: `${product.detalhes === 3 ? '80px' : '40px'}`,
                   position: 'relative',
                   left: '4px',
-                  width: `${product.detalhes === 3 || product.detalhes === 5 ? '500px' : '330px'}`,
+                  width: `${product.detalhes === 3 || product.detalhes === 5 ? '1200px' : '330px'}`,
                   display: `${product.detalhes === 1 ? "none" : 'flex'}`,
                   background: 'white',
-                  padding: '80px 0',
+                  padding: '72px 33px',
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: '5px',
                   boxShadow: '1px 1px'
-                }}>{product.nome}&reg;</h1></span>
+                }}>{product.nome}</h1></span>
+            </div>
+            <div style={{
+              display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+              justifyContent: 'space-around',
+
+              width: '100%'
+            }}>
+              <span style={{
+                display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'flex'}`,
+                width: '100%',
+                flexWrap: 'wrap',
+                justifyContent: 'center'
+              }}>
+
+                {product.sabores.map((sabor, index) => (
+                  <>
+
+                    <p key={index} style={{
+                      display: 'flex',
+                      justifyContent: 'space-around',
+                      margin: '5px 8px',
+                      flexDirection: 'column-reverse',
+                      alignItems: 'center',
+                      fontSize: '25px',
+                      width: '180px',
+                      padding: '15px 5px',
+                      textTransform: 'capitalize',
+                      letterSpacing: '1.5px',
+                      textDecoration: 'overline red 1px',
+                      boxShadow: '2px 2px 5px red',
+                      backgroundColor: '#d0b82b'
+                    }}> {sabor.replace(/\./g, ' ')}
+                      <img src={`http://192.168.43.1:5000/images/${sabor}`} alt="" style={{ height: '150px', boxShadow: '1px 1px 4px black', width: '150px', borderRadius: '50%' }} />
+                    </p>
+
+                  </>
+                ))}
+              </span>
+
+
             </div>
             <div style={{
               display: `${product.detalhes === 0 ? "none" : 'flex'}`,
@@ -114,7 +159,8 @@ const ListaProdutos: React.FC = () => {
                       fontSize: `${product.detalhes === 3 ? '50px' : '30px'}`,
                     }}>
                       <div style={{ textTransform: 'uppercase' }}>
-                        {index + 1}º {componente}
+                        
+                        {componente}
                       </div>
                     </div>
                   ))}
@@ -127,39 +173,22 @@ const ListaProdutos: React.FC = () => {
                   padding: '15px 15px',
                   background: 'white',
                   borderRadius: '8px',
+                  borderTopLeftRadius: '8px',
+                  borderTopRightRadius: '8px',
                   boxShadow: '1px 1px',
                   letterSpacing: '1.5px',
                   display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'flex'}`
                 }}>{product.descricao}</span>
 
               </div>
+
               <div style={{
                 display: `${product.detalhes === 1 ? "none" : 'flex'}`,
                 justifyContent: 'center',
                 width: '50%'
               }}>
 
-                <div style={{
-                  display: `${product.detalhes === 1 ? "none" : 'flex'}`,
-                  justifyContent: 'center'
-                }}>
-                  <span style={{ display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'flex'}` }}>
-                    {product.sabores.length > 0 ? (
-                      <h3 style={{ fontSize: '35px' }}>Opções</h3>
-                    ) : null}
-                    {product.sabores.map((sabor, index) => (
-                      <>
 
-                        <p key={index} style={{ fontSize: '35px', width: '150px', padding: '0 40px', textTransform: 'capitalize', letterSpacing: '3px', textDecoration: 'overline orange 15px' }}> {sabor}
-                          <img src={`http://192.168.43.1:5000/images/${sabor}`} alt="" style={{ height: '120px' }} />
-                        </p>
-
-                      </>
-                    ))}
-                  </span>
-
-
-                </div>
 
 
               </div>
@@ -169,7 +198,10 @@ const ListaProdutos: React.FC = () => {
                 justifyContent: 'center'
               }}>
 
-                <span style={{ fontSize: '30px', padding: '15px 15px', background: 'white', color: 'black', borderRadius: '5px', boxShadow: '1px 1px', display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'block'}` }}>{product.obs}</span>
+                <span style={{
+                  fontSize: '30px', padding: '15px 15px', background: 'white', color: 'black', borderBottomLeftRadius: '8px',
+                  borderBottomRightRadius: '8px', boxShadow: '1px 1px', display: `${product.detalhes === 4 || product.detalhes === 5 ? 'none' : 'block'}`
+                }}>{product.obs}</span>
 
               </div>
             </div>
