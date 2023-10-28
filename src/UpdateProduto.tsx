@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import io, { Socket } from 'socket.io-client';
 
+
+const ip: string = "192.168.0.50";
+
 interface Produto {
   id: number;
   nome: string;
   version: number;
   detalhes: number;
   tipo: number;
+  imagem: string;
   // Adicione outros campos do produto conforme necessário
 }
 
@@ -20,7 +24,7 @@ const UpdateProduto: React.FC<UpdateProdutoProps> = ({ id }) => {
 
   useEffect(() => {
     // Conectar ao servidor Socket.io
-    const socket = io(`http://192.168.43.1:8000`);
+    const socket = io(`http://192.168.0.50:8000`);
 
     setSocket(socket);
 
@@ -44,9 +48,9 @@ const UpdateProduto: React.FC<UpdateProdutoProps> = ({ id }) => {
 
   const manopla = () => {
     return (
-      <div>
+      <>
 
-      </div>
+      </>
     );
   };
 
@@ -85,9 +89,9 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
   const colors = ['whitesmoke', '#8a8a8a', '#9418d3']; // Array de cores correspondentes aos valores de product.version
 
   return (
-    <div>
+    <div className="painel-treinador">
 
-      <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <ul className='lista-painel-treinador'>
         {produtos.map((product) => (
           <li
             key={product.id}
@@ -101,7 +105,17 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
               width: '160px'
             }}
           >
-            <div>
+            <div className='manual-div'>
+            <span>
+                  <img src={`http://${ip}:5000${product.imagem}`} alt="" style={{
+                    display: `${product.detalhes === 1 ? "none" : 'flex'}`,
+                    width: `${product.detalhes === 3 ? '165px' : '140px'}`,
+                    height: `${product.detalhes === 3 ? '165px' : '140px'}`,
+                    position: 'relative',
+                    top: '0px',
+                    borderRadius: '15px',
+                    boxShadow: '1px 1px 7px black'
+                  }} /></span>
               <span>
                 <h1
                   style={{
@@ -136,7 +150,7 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
                     }
                   }}
                 >
-                  mostrar
+                  inicio
                 </button>
                 <button
 
@@ -166,7 +180,7 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
                     }
                   }}
                 >
-                  exibir
+                  nome
                 </button>
               </div>
 
@@ -191,76 +205,10 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
                     }
                   }}
                 >
-                  select
+                  marcar
                 </button>
-                <button
-
-                  style={{
-                    backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'violet'}`,
-                    color: `${product.version === 0 ? 'black' : 'white'}`,
-                    textTransform: 'uppercase',
-                  }}
-                  onClick={() => {
-                    if (socket) {
-                      const updatedProduto: Produto = {
-                        ...product,
-                        version: 1,
-                        detalhes: 4,
-                      };
-
-                      socket.emit('update_produto', updatedProduto);
-                      setTimeout(() => {
-                        const updatedProduto: Produto = {
-                          ...product,
-                          version: 1,
-                          detalhes: 0,
-                        };
-
-                        socket.emit('update_produto', updatedProduto);
-                      }, 3500); // 1500 milissegundos = 1.5 segundos
-                      setTimeout(() => {
-                        const updatedProduto: Produto = {
-                          ...product,
-                          version: 1,
-                          detalhes: 1,
-                        };
-
-                        socket.emit('update_produto', updatedProduto);
-                      }, 8000);
-                      setTimeout(() => {
-                        const updatedProduto: Produto = {
-                          ...product,
-                          version: 1,
-                          detalhes: 3,
-                        };
-
-                        socket.emit('update_produto', updatedProduto);
-                      }, 16000);
-                    }
-                  }}
-                >
-                  animar
-                </button>
-                <button
-                  style={{
-                    backgroundColor: `${product.detalhes === 2 ? 'red' : 'whitesmoke'}`,
-                    color: `${product.version === 0 ? 'white' : 'black'}`,
-                    textTransform: 'uppercase',
-                  }}
-                  onClick={() => {
-                    if (socket) {
-                      const updatedProduto: Produto = {
-                        ...product,
-                        version: 1,
-                        detalhes: 2,
-                      };
-
-                      socket.emit('update_produto', updatedProduto);
-                    }
-                  }}
-                >
-                  info
-                </button>
+              
+                
                 <button
                   style={{
                     backgroundColor: `${product.detalhes === 3 ? 'red' : 'whitesmoke'}`,
@@ -279,7 +227,7 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
                     }
                   }}
                 >
-                  TELA++
+                  loopa
                 </button>
                 <button
                   style={{
@@ -300,12 +248,18 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
                     }
                   }}
                 >
-                  Itens
+                  composição
                 </button>
 
+
+              </div>
+
+              <div style={{
+                display: `${product.version === 0 ? 'none' : 'block'}`
+              }}>
                 <button
                   style={{
-                    backgroundColor: `${product.detalhes === 4 ? 'red' : 'whitesmoke'}`,
+                    backgroundColor: `${product.detalhes === 2 ? 'red' : 'whitesmoke'}`,
                     color: `${product.version === 0 ? 'white' : 'black'}`,
                     textTransform: 'uppercase',
                   }}
@@ -314,20 +268,15 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
                       const updatedProduto: Produto = {
                         ...product,
                         version: 1,
-                        detalhes: 4,
+                        detalhes: 2,
                       };
 
                       socket.emit('update_produto', updatedProduto);
                     }
                   }}
                 >
-                  imagem
+                  informações
                 </button>
-
-              </div>
-              <div style={{
-                display: `${product.version === 0 ? 'none' : 'block'}`
-              }}>
                 <button
                   style={{
                     backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'black'}`,
@@ -348,42 +297,14 @@ const Treinador: React.FC<TreinadorProps> = ({ manopla, socket }) => {
                 >
                   REMOVE
                 </button>
-                <button
-                  style={{
-                    backgroundColor: `${product.version === 0 ? 'whitesmoke' : 'black'}`,
-                    color: `${product.version === 0 ? 'white' : 'white'}`,
-                    textTransform: 'uppercase',
-                  }}
-                  onClick={() => {
-                    if (socket) {
-                      const updatedProduto: Produto = {
-                        ...product,
-                        version: 2,
-                        detalhes: 4,
-                      };
-
-                      socket.emit('update_produto', updatedProduto);
-                      setTimeout(() => {
-                        const updatedProduto: Produto = {
-                          ...product,
-                          version: 0,
-                          detalhes: 0,
-                        };
-
-                        socket.emit('update_produto', updatedProduto);
-                      }, 2500); // 2500 milissegundos = 2.5 segundos
-                    }
-                  }}
-                >
-                  OCULTAR
-                </button>
+              
               </div>
             </div>
 
           </li>
         ))}
       </ul>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }} className='controlador'>
+      <div className='controlador'>
         {manopla()}
         <div className='titutlo-produto'>
           <p>frutas</p>

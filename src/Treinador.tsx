@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
-const socketIO = io('http://192.168.43.1:8000');
+const socketIO = io('http://192.168.0.50:8000');
 
 interface Produto {
   id: number;
@@ -31,7 +31,7 @@ const Treinador: React.FC<{ manopla: () => JSX.Element }> = ({ manopla }) => {
 
   useEffect(() => {
     // Conectar ao servidor Socket.io
-    const socket = io('http://192.168.43.1:8000');
+    const socket = io('http://192.168.0.50:8000');
     setSocket(socket);
 
     // Lidar com a resposta do servidor ao atualizar um produto
@@ -61,10 +61,11 @@ const Treinador: React.FC<{ manopla: () => JSX.Element }> = ({ manopla }) => {
   }, []);
 
   return (
-    <div>
+    <>
+      <div>
 
-      <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <>
+        <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
+
           <div style={{ margin: '-15px 0 0 0', position: 'fixed' }}></div>
           {produtos.map((product) => (
             <li
@@ -138,10 +139,11 @@ const Treinador: React.FC<{ manopla: () => JSX.Element }> = ({ manopla }) => {
               {manopla()}
             </li>
           ))}
-        </>
-      </ul>
 
-    </div>
+        </ul>
+
+      </div>
+    </>
   );
 };
 

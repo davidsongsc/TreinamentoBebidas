@@ -1,10 +1,32 @@
+body{
+  background-image: url("/img/bgobk.jpg");
+  background-color: rgb(8, 8, 8);
+}
+
 /* ListaProdutos.css */
+.controlador {
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  overflow-y: scroll;
+  width: 900px;
+}
+
 .controlador p {
   background-color: white;
   text-align: center;
   text-transform: uppercase;
 }
-
+.lista-painel-treinador {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 96vh;
+  overflow-y: scroll;
+}
+.painel-treinador {
+  display: flex;
+  flex-direction: row-reverse;
+}
 .lista-produtos-container {
   margin-top: 0px;
 }
@@ -21,40 +43,53 @@
 }
 
 .linha-produto {
-  padding: 5px 10px;
+  padding: 1px 2px;
   display: flex;
   justify-items: start;
-  background-color: orangered;
   border-radius: 5px;
   box-shadow: black 1px 1px 4px;
   margin: 1px 2px 0 -7px;
   flex-wrap: wrap;
-  justify-content: space-around;
   align-items: flex-start;
   align-content: flex-start;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
   transition-delay: 1.5s;
   border-width: 6px;
-  /*border-style: double;*/
+  background: linear-gradient(45deg, white, orange, gold) 0% 0% / 150% 150%
+    rgb(205, 92, 92);
+  justify-content: flex-start;
+  animation: 15s ease 0s infinite normal none running gradientAnimation;
 }
 
 .linha-produto.hidden {
   opacity: 0;
 }
-
+.manual-div{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 button {
+  cursor: pointer;
   margin: 2px 1px;
-  width: 78px;
   text-align: left;
   height: 30px;
+  box-shadow: 1px 1px;
 }
-
+button:active,
+button:hover {
+  box-shadow: -1px -1px;
+}
+button:active {
+  color: white;
+  background-color: black;
+}
 .titutlo-produto {
   border-radius: 5px;
   margin: 3px;
   background-color: orangered;
-  
 }
 .titutlo-produto p {
   margin: 8px auto;
@@ -69,13 +104,18 @@ button {
   height: 60px;
   font-weight: 800;
   text-transform: uppercase;
-  color:whitesmoke;
+  color: whitesmoke;
   background-color: black;
 }
 
-
 @keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

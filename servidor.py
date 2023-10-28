@@ -3,7 +3,7 @@ import socketio
 import sqlite3
 import json
 
-sio = socketio.Server(cors_allowed_origins=['http://192.168.43.1:3000'])
+sio = socketio.Server(cors_allowed_origins=['http://192.168.0.50:3000'])
 app = socketio.WSGIApp(sio)
 
 # Configuração do banco de dados SQLite
@@ -38,9 +38,8 @@ def get_produtos():
             "tipo": produto[14],
             "descricao": produto[15],
             "sys": produto[16],
-            "imglist": json.loads(produto[17])
-
-
+            "imglist": json.loads(produto[17]),
+            
         }
         formatted_produtos.append(formatted_produto)
 

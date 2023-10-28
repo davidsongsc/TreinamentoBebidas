@@ -11,4 +11,4 @@ def get_image(image_id):
     return send_file(f'img/{image_id}.jpg', mimetype='image/jpeg')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='192.168.0.50', port=5000)
