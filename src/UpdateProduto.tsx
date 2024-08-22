@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io, { Socket } from 'socket.io-client';
 
 
-const ip: string = "192.168.0.50";
+const ip: string = "192.168.1.102";
 
 interface Produto {
   id: number;
@@ -24,7 +24,7 @@ const UpdateProduto: React.FC<UpdateProdutoProps> = ({ id }) => {
 
   useEffect(() => {
     // Conectar ao servidor Socket.io
-    const socket = io(`http://192.168.0.50:8000`);
+    const socket = io(`http://192.168.1.102:8000`);
 
     setSocket(socket);
 

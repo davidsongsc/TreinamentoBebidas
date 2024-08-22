@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
-const ip: string = "192.168.0.50";
+const ip: string = "192.168.1.102";
 
 
 const socket = io(`http://${ip}:8000`);

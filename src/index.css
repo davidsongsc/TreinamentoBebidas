@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-size: 100%;
-  background-image: url('http://192.168.43.1:5000/images/outback');
+  background-image: url('http://192.168.1.102:5000/images/tijuca');
   background-repeat: no-repeat;
 
 }

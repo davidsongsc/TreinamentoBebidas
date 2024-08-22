@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
-const socketIO = io('http://192.168.0.50:8000');
+const socketIO = io('http://192.168.1.102:8000');
 
 interface Produto {
   id: number;

@@ -3,7 +3,7 @@ import socketio
 import sqlite3
 import json
 
-sio = socketio.Server(cors_allowed_origins=['http://192.168.0.50:3000'])
+sio = socketio.Server(cors_allowed_origins=['http://192.168.1.102:3000'])
 app = socketio.WSGIApp(sio)
 
 # Configuração do banco de dados SQLite
